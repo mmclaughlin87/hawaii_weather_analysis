@@ -23,7 +23,7 @@ year = datetime.timedelta(days=365)
 year_ago = current_datetime - year
 today = current_datetime.strftime('%Y-%m-%d')
 
-# create function for temperature calculations
+# define method for temperature calculations
 def calc_temps(start_date, end_date=today):
     """TMIN, TAVG, and TMAX for a list of dates.
     
@@ -44,11 +44,20 @@ app = Flask(__name__)
 # define routes and functions
 @app.route("/")
 def home():
-    return "Hello World!"
-
-@app.route("/about")
-def about():
-    return "Here is some info!"
+    return (
+        f"<br/>"
+        f"Welcome to the Hawaiian Weather Center!<br/><br/>"
+        f"Available Routes:<br/>"
+        f"/api/v1.0/precipitation<br/>"
+        f"Returns precipitation data for the previous year<br/><br/>"
+        f"/api/v1.0/stations<br/>"
+        f"Returns a list of weather stations<br/><br/>"
+        f"/api/v1.0/tobs<br/>"
+        f"Returns observed temperatures from the previous year<br/><br/>"
+        f"/api/v1.0/[start]/[end]<br/>"
+        f"Returns the minimum, average, and maximum temperatures for a given date range<br/>"
+        f"If no end date is provided, all dates after the start date will be included<br/>"        
+    )
 
 # retrieve precipitation data for previous year
 @app.route("/api/v1.0/precipitation")
